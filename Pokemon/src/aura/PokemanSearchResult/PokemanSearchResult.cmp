@@ -1,0 +1,42 @@
+<aura:component controller="PokemonSearchController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global" >
+    <aura:attribute name="SearchResult" type="Map"/>
+    <aura:attribute name="lstKey" type="List"/>
+    <aura:attribute name="customers" type="List" />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    
+    
+    <div class = "headerImage">
+        <!-- working on the style late -->
+    	<!--img src="{!$Resource.Pokeman_Gallery + '/images/hero-background.jpg'}"></img-->
+    </div>
+    
+    <div class="slds-grid">
+    	<div class="slds-p-horizontal_medium">
+        	<ul class="slds-list_horizontal">
+                <li><ui:button aura:id="buttonHome" buttonTitle="Home" class="button" label="Home" press="{!c.goHome}"/></li>        
+            </ul>  
+            <ul class="slds-list_horizontal">
+                   <h2>Search Result</h2>    
+            </ul> 
+        </div>       
+    </div>
+  
+    <table class="slds-table slds-table_bordered slds-table_cell-buffer slds-table_col-bordered">    
+ 	  
+           <div class = "demo-only demo-only--sizing slds-grid slds-wrap">
+            <aura:iteration items="{!v.customers}" var="cus" indexVar="key">
+                          <div class="slds-size_1-of-4">
+    						  <div class="slds-box slds-box_x-small slds-text-align_center slds-m-around_x-small">
+                                <ul>
+                                   <li><img src="{!$Resource.Pokeman_Gallery + '/images/'+(cus.key)+'.png'}"></img></li>
+                                   <li>#{!cus.key}</li>                                          
+                                   <li>{!cus.value}</li>         
+                        		</ul>
+                              </div>
+  						  </div>
+
+            </aura:iteration>
+          </div>
+</table>
+</aura:component>

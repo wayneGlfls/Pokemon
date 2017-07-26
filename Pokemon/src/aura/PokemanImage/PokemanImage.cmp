@@ -1,0 +1,72 @@
+<aura:component controller="PokemonController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global" >
+    
+    <aura:attribute name="offset" type="Integer" default="0"/>
+    <aura:attribute name="count" type="Integer" default="1"/>
+    <aura:attribute name="PokemonList" type="String[]"/>
+    <aura:attribute name="Remainder" type="Integer" />
+    <aura:attribute name="SearchResult" type="Map" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    	
+    <div class = "headerImage">
+        <!-- working on the style late -->
+        <h2>Pokemon Gallery Home</h2>
+    </div>
+      
+    <div class="slds-grid">
+    	<div class="slds-p-horizontal_medium">
+        	<ul class="slds-list_horizontal">
+        		<li><ui:button aura:id="buttonPrev" buttonTitle="Prev" class="button" label="Prev"  press="{!c.prev}"/></li>
+  				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <li><ui:button aura:id="buttonNext" buttonTitle="Next" class="button" label="Next" press="{!c.next}"/></li>        
+            </ul>        
+        </div>
+        
+  		<div class="slds-p-horizontal_medium" >
+ 			 <ul class="slds-list_horizontal">
+                <li><ui:inputText class="searchTerm" aura:id="lookupSearchTwo"  placeholder="Type Name to Search ...." keyup="{!c.EnterSearch}"/> </li>
+		  		&nbsp;&nbsp;			
+                <li><lightning:buttonIcon iconName="utility:search" size="large" alternativeText="Close" onclick="{!c.ClickSearch}"/></li>
+			 </ul>  
+        </div>    
+    </div>
+    
+    <br></br>
+    <table class="slds-table slds-table_bordered slds-table_cell-buffer slds-table_col-bordered">
+        <!--thead>
+            <tr class="slds-text-title_caps">
+              <th scope="col">
+                <div class="slds-truncate" title="Pokeman1">Pokeman1</div>
+              </th>
+              <th scope="col">
+                <div class="slds-truncate" title="Pokeman2">Pokeman2</div>
+              </th>
+              <th scope="col">
+                <div class="slds-truncate" title="Pokeman3">Pokeman3</div>
+              </th>
+              <th scope="col">
+                <div class="slds-truncate" title="Pokeman4">Pokeman4</div>
+              </th>
+            </tr>
+  		</thead-->
+
+		<!--this part needs to be conditionally displayed -->
+		<tbody>
+            <div class = "demo-only demo-only--sizing slds-grid slds-wrap">
+             <aura:iteration var="pokemon" items="{!v.PokemonList}" indexVar="index"> 
+   
+                     <div class = "slds-size_1-of-4">
+                        <div class="slds-box slds-text-align_center slds-box_x-small slds-m-around_x-small">
+                        <ul>                          
+                           <!--this part needs to be applied conditionally-->
+                           <li><img src="{!$Resource.Pokeman_Gallery + '/images/'+(index+1+v.offset)+'.png'}"></img></li>
+                           <li>#{!index+1+v.offset}</li>                                                       
+                           <li>{!pokemon}</li>
+                        </ul>
+                        </div>
+                  	 </div>
+              </aura:iteration> 
+            </div>
+        </tbody>      
+    </table>
+    	
+</aura:component>
