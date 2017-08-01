@@ -1,0 +1,84 @@
+<aura:component controller="PokemonControllerV2" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global" >
+    
+    <aura:attribute name="offset" type="Integer" default="0"/>
+    <aura:attribute name="PageNumber" type="Integer" default="0"/>
+    <aura:attribute name="CurrentNameList" type="String[]"/>
+    <aura:attribute name="count" type="Integer" default="1"/>
+    <aura:attribute name="PokemonList" type="String[]"/>
+    <aura:attribute name="PokemonMap" type="Map"/>
+    <aura:attribute name="Remainder" type="Integer" />
+    <aura:attribute name="SearchResult" type="Map" />
+    <aura:attribute name="cssdefault" type="string" />
+    <aura:attribute name="Isphone" type="Boolean"/>
+    <aura:attribute name="IsTablet" type="Boolean"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <aura:handler event="aura:doneWaiting" action="{!c.hideSpinner}"/>
+
+    	
+    <div class = "headerImage slds-text-align_center">
+        <!-- working on the style late -->
+        <h2>Pokemon Gallery Home</h2>
+    </div>
+      
+    <div class="slds-grid">
+    	<div class="slds-p-horizontal_medium">
+        	<ul class="slds-list_horizontal">
+        		<li><ui:button aura:id="buttonPrev" buttonTitle="Prev" class="button" label="Prev"  press="{!c.prevV2}"/></li>
+  				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <li><ui:button aura:id="buttonNext" buttonTitle="Next" class="button" label="Next" press="{!c.nextV3}"/></li>        
+            </ul>        
+        </div>
+        
+  		<div class="slds-p-horizontal_medium" >
+ 			 <ul class="slds-list_horizontal">
+                <li><ui:inputText class="searchTerm" aura:id="lookupSearchTwo"  placeholder="Type Name to Search ...." keyup="{!c.EnterSearch}"/> </li>
+		  		&nbsp;&nbsp;			
+                <li><lightning:buttonIcon iconName="utility:search" size="large" alternativeText="Close" onclick="{!c.ClickSearch}"/></li>
+			 </ul>  
+        </div> 
+    </div>
+    
+    <div class="slds-grid">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </div>
+           
+    <div class="slds-grid">
+        <div class="slds-p-horizontal_medium" >
+                 <ul class="slds-list_horizontal">
+                    No of Pokemon per row:
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <li><ui:button aura:id="changesize1" buttonTitle="Changesize1" class="button" label="1 "  press="{!c.change1}"/></li>
+                    &nbsp;&nbsp;
+                    <li><ui:button aura:id="changesize2" buttonTitle="Changesize2" class="button" label="2 "  press="{!c.change2}"/></li>
+                    &nbsp;&nbsp;                 
+                    <li><ui:button aura:id="changesize4" buttonTitle="Changesize4" class="button" label="4 "  press="{!c.change4}"/></li>
+                </ul>  
+         </div>
+    </div>
+    
+    <br></br>
+    <table class="slds-table slds-table_bordered slds-table_cell-buffer slds-table_col-bordered">
+		<center> <ui:spinner aura:id="mySpinner"/> </center>
+		<!--this part needs to be conditionally displayed -->
+		<tbody>
+            <div class = "demo-only demo-only--sizing slds-grid slds-wrap">
+
+             <aura:iteration var="pokemon" items="{!v.CurrentNameList}" indexVar="index"> 
+   
+                     <div class = "{!v.cssdefault}">
+                        <div class="slds-box slds-text-align_center slds-box_x-small slds-m-around_x-small">
+                        <ul>                          
+                           <!--this part needs to be applied conditionally-->
+                           <li><img src="{!$Resource.Pokeman_Gallery + '/images/'+(index+1+v.offset)+'.png'}"></img></li>
+                           <li>#{!index+1+v.offset}</li>                                                       
+                           <li>{!pokemon}</li>
+                        </ul>
+                        </div>
+                  	 </div>
+              </aura:iteration> 
+            </div>
+        </tbody>      
+    </table>
+    	
+</aura:component>
