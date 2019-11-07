@@ -2,7 +2,7 @@ public class PokemonControllerV2 {
 	@AuraEnabled
     public static Map<Integer, List<String>> getPokeminNames(Integer direction){
     //public static List<String> getPokeminNames(Integer direction){
-        // Create HTTP request to send.
+        // Create HTTP request to send. Add some extra comments here
         HttpRequest request = new HttpRequest();
         String endpoint = 'http://pokeapi.co/api/v2/pokemon/?limit=151';
         request.setEndPoint(endpoint);
