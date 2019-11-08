@@ -1,5 +1,5 @@
 <aura:component controller="PokemonControllerV2" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global" >
-    
+    <!--add some comments for master -->
     <aura:attribute name="offset" type="Integer" default="0"/>
     <aura:attribute name="PageNumber" type="Integer" default="0"/>
     <aura:attribute name="CurrentNameList" type="String[]"/>
